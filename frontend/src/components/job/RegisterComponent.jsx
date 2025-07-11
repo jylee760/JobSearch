@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../api/axios.js";
+import { register } from "../../api/axios.js";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -12,17 +12,14 @@ const LoginForm = () => {
     e.preventDefault();
     setError("");
     try {
-      const response = await login(username, password);
-      const token = response.data.token;
-
-      localStorage.setItem("token", token);
-      navigate("/home");
+      const response = await register(username, password);
+      navigate("/login");
     } catch (err) {
-      setError("Invalid username or password");
+      setError("Invalid username for registration");
     }
   };
-  const rerouteToRegister = () =>{
-    navigate("/register")
+  const rerouteToLogin = () =>{
+    navigate("/login")
   }
 
   return (<>
@@ -47,11 +44,11 @@ const LoginForm = () => {
         required
       />
 
-      <button type="submit">Login</button>
+      <button type="submit">Register</button>
     </form>
-    <button onClick={rerouteToRegister}>Register</button>
+    <button onClick={rerouteToLogin}>Login</button>
   </>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

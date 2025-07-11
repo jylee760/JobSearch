@@ -5,19 +5,24 @@ import SearchComponent from "./SearchComponent.jsx";
 import SavedComponent from "./SavedComponent.jsx";
 import LoginComponent from "./LoginComponent.jsx";
 import ErrorComponent from "./ErrorComponent.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
 import { AppProvider } from "./AppContext.jsx";
+import RegisterComponent from "./RegisterComponent.jsx"
+import LogoutComponent from "./LogoutComponent.jsx"
 export default function JobApp() {
   return (
     <div>
       <AppProvider>
         <BrowserRouter>
-          <HeaderComponent />
           <Routes>
-            <Route path="/" element={<LoginComponent />} />
-            <Route path="/home/:username" element={<HomeComponent />} />
-            <Route path="/search/jobs" element={<SearchComponent />} />
-            <Route path="/saved" element={<SavedComponent />} />
-            <Route path="*" element={ErrorComponent} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/login" element={<LoginComponent />} />
+            <Route path="/register" element={<RegisterComponent />} />
+            <Route path="/logout" element={<LogoutComponent/>}/>
+            <Route path="/home" element={<PrivateRoute><HeaderComponent /><HomeComponent /></PrivateRoute>} />
+            <Route path="/search/jobs" element={<PrivateRoute><HeaderComponent /><SearchComponent /></PrivateRoute>} />
+            <Route path="/saved" element={<PrivateRoute><HeaderComponent /><SavedComponent /></PrivateRoute>} />
+            <Route path="*" element={<ErrorComponent/>} />
           </Routes>
         </BrowserRouter>
       </AppProvider>

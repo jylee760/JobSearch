@@ -114,7 +114,7 @@ export default function HeaderComponent() {
                     </li>
                     <li>
                       {
-                        <Link className="dropdown-i" to="/" onClick={reset}>
+                        <Link className="dropdown-i" to="/logout" onClick={reset}>
                           Logout
                         </Link>
                       }
