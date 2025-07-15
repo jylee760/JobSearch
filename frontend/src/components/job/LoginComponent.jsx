@@ -13,9 +13,10 @@ const LoginForm = () => {
     setError("");
     try {
       const response = await login(username, password);
-      const token = response.data.token;
+      const token = response.data;
 
       localStorage.setItem("token", token);
+      console.log(localStorage.getItem("token"));
       navigate("/home");
     } catch (err) {
       setError("Invalid username or password");
